@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O11yAura - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            color: white;
+        }
+        
+        /* Photo Background */
+        .photo-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url('assets/images/comingsoon.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        /* Dark overlay for text readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(113, 29, 77, 0.75);  /* Your burgundy/purple with transparency */
+            z-index: -1;
+        }
+        
+        /* Fallback solid background if photo doesn't load */
+        .fallback-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #711D4D;  /* Your burgundy/purple */
+            z-index: -3;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Logo Image */
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            border-radius: 20px; /* Adjust based on your logo style */
+        }
+        
+        /* Fallback text logo if image doesn't load */
+        .logo-text {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #711D4D; /* Your burgundy/purple */
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            line-height: 1.6;
+            font-weight: 300;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .coming-soon-box {
+            background: rgba(113, 29, 77, 0.4);  /* Your burgundy/purple with transparency */
+            border: 2px solid rgba(0, 32, 96, 0.6);  /* Your dark blue border */
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            margin: 40px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        
+        .launch-date {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #002060; /* Your dark blue for highlights */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .beta-interest {
+            background: linear-gradient(135deg, #002060, #711D4D); /* Dark blue to burgundy */
+            color: white;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 32, 96, 0.3);
+        }
+        
+        .beta-interest:hover {
+            background: linear-gradient(135deg, #711D4D, #002060);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 32, 96, 0.4);
+        }
+        
+        .contact {
+            margin-top: 50px;
+            opacity: 0.9;
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .features-hint {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature-hint {
+            background: rgba(64, 64, 64, 0.8);  /* Dark grey #404040 with transparency */
+            border: 1px solid rgba(64, 64, 64, 0.9);  /* Dark grey border */
+            padding: 25px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-hint:hover {
+            background: rgba(0, 32, 96, 0.8);  /* Dark blue on hover */
+            border-color: rgba(0, 32, 96, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #711D4D; /* Your burgundy/purple for titles */
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .features-hint {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .coming-soon-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fallback background -->
+    <div class="fallback-background"></div>
+    
+    <!-- Photo background -->
+    <div class="photo-background"></div>
+    
+    <!-- Dark overlay for readability -->
+    <div class="overlay"></div>
+    
+    <div class="container">
+        <!-- Logo Image (replace with your logo path) -->
+        <img src="assets/images/o11yaura-logo.png" alt="O11yAura" class="logo-image" onerror="this.style.display='none'; document.querySelector('.logo-text').style.display='block';">
+        
+        <!-- Fallback text logo -->
+        <div class="logo-text" style="display: none;">O11yAura</div>
+        
+        <h1>Something powerful is coming</h1>
+        <p class="subtitle">
+            We're building the next generation of developer tools that make complex systems simple to understand and manage.
+        </p>
+        
+        <div class="features-hint">
+            <div class="feature-hint">
+                <div class="feature-icon">🚀</div>
+                <div class="feature-title">Modern</div>
+                <div class="feature-desc">Built for today's development teams</div>
+            </div>
+            <div class="feature-hint">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-title">Intelligent</div>
+                <div class="feature-desc">Smart automation that learns</div>
+            </div>
+            <div class="feature-hint">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Simple</div>
+                <div class="feature-desc">Complex problems, simple solutions</div>
+            </div>
+        </div>
+        
+        <div class="coming-soon-box">
+            <div class="launch-date">🎯 Beta Launch: January 2025</div>
+            <p class="description">
+                Join our exclusive beta program and be among the first to experience what we're building. 
+                Limited spots available for development teams.
+            </p>
+            <a href="mailto:hello@o11yaura.com?subject=Beta Interest&body=Hi! I'm interested in the O11yAura beta program. Please keep me updated." class="beta-interest">
+                Join Beta Waitlist
+            </a>
+        </div>
+        
+        <div class="contact">
+            <p>Questions? Get in touch at <strong>hello@o11yaura.com</strong></p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Built by developers, for developers</p>
+        </div>
+    </div>
+</body>
+</html>
