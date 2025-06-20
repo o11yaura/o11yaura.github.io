@@ -85,8 +85,25 @@
             color: white;
             letter-spacing: -2px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
-            /* Logo animation */
-            animation: fadeInUp 0.8s ease-out;
+            /* Logo animation with bounce */
+            animation: fadeInBounce 1s ease-out;
+        }
+        
+        @keyframes fadeInBounce {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+            80% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+            }
         }
         
         h1 {
